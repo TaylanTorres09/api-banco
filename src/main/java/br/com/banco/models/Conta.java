@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
@@ -34,4 +33,9 @@ public class Conta {
     @OneToMany(mappedBy = "conta")
     private List<Transferencia> transferencias = new ArrayList<>();
 
+    public Conta(Long idConta, String nomeResponsavel, String nomeOperadorTransacao) {
+        this.idConta = idConta;
+        this.nomeResponsavel = nomeResponsavel;
+        this.nomeOperadorTransacao = nomeOperadorTransacao;
+    }
 }
