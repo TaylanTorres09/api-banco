@@ -29,6 +29,8 @@ public class Transferencia {
 
     private String tipo;
 
+    private String nomeOperadorTransacao;
+
     @ManyToOne
     @JoinColumn(name = "conta_id")
     private Conta conta;

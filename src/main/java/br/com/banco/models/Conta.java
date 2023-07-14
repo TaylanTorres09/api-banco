@@ -27,15 +27,12 @@ public class Conta {
 
     private String nomeResponsavel;
 
-    private String nomeOperadorTransacao;
-
     @JsonIgnore
     @OneToMany(mappedBy = "conta")
     private List<Transferencia> transferencias = new ArrayList<>();
 
-    public Conta(Long idConta, String nomeResponsavel, String nomeOperadorTransacao) {
+    public Conta(Long idConta, String nomeResponsavel) {
         this.idConta = idConta;
         this.nomeResponsavel = nomeResponsavel;
-        this.nomeOperadorTransacao = nomeOperadorTransacao;
     }
 }
