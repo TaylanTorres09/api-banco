@@ -14,7 +14,11 @@ public class TransferenciaService {
     @Autowired
     private TransferenciaRepository transferenciaRepository;
 
+    @Autowired
+    private ContaService contaService;
+
     public List<Transferencia> findByContaId(Long contaId) {
+        this.contaService.findById(contaId);
         return this.transferenciaRepository.findByContaId(contaId);
     }
 
