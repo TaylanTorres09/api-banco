@@ -15,4 +15,7 @@ public interface TransferenciaRepository extends JpaRepository<Transferencia, Lo
     @Query(value = "SELECT * FROM TRANSFERENCIA t WHERE t.conta_id = :contaId", nativeQuery = true)
     List<Transferencia> findByContaId(@Param(value = "contaId") Long contaId);
 
+    @Query(value = "SELECT * FROM TRANSFERENCIA t WHERE t.nome_operador_transacao = :nomeOperador", nativeQuery = true)
+    List<Transferencia> findByNomeOperador(@Param(value = "nomeOperador") String nomeOperador);
+
 }
