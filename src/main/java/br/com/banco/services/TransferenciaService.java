@@ -1,5 +1,7 @@
 package br.com.banco.services;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +30,13 @@ public class TransferenciaService {
 
     public List<Transferencia> findByNomeOperador(String nomeOperador) {
         return this.transferenciaRepository.findByNomeOperador(nomeOperador);
+    }
+
+    public List<Transferencia> findBetweenDates(String first, String last) {
+        DateTimeFormatter fmt =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime firsTime = LocalDateTime.parse(first, fmt);
+        LocalDateTime lastTime = LocalDateTime.parse(last, fmt).plusDays(1);
+
+        return this.transferenciaRepository.findBetweenDates(firsTime, lastTime);
     }
 }
