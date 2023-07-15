@@ -70,6 +70,28 @@ public class TransferenciaServiceTest {
         assertEquals(conta.getNomeResponsavel(), response.get(0).getConta().getNomeResponsavel());
     }
 
+    @Test
+    void whenFindAll() {
+        when(transferenciaRepository.findAll()).thenReturn(transferencias);
+
+        List<Transferencia> response = transferenciaService.findAll();
+
+        assertNotNull(response);
+        assertEquals(Transferencia.class, response.get(0).getClass());
+        assertEquals(ID, response.get(0).getId());
+        assertEquals(dataTransferencia, response.get(0).getDataTransferencia());
+        assertEquals(valor, response.get(0).getValor());
+        assertEquals(tipo, response.get(0).getTipo());
+        assertEquals(nomeOperadorTransacao, response.get(0).getNomeOperadorTransacao());
+        assertEquals(conta.getClass(), response.get(0).getConta().getClass());
+        assertEquals(conta.getIdConta(), response.get(0).getConta().getIdConta());
+        assertEquals(conta.getNomeResponsavel(), response.get(0).getConta().getNomeResponsavel());
+    }
+
+    void whenFindByNomeOperadorThenReturnTransferencias() {
+
+    }
+
     private void startContaTransferencia() {
         conta = new Conta(ID, nomeResponsavel);
         transferencia = new Transferencia(ID, dataTransferencia, valor, tipo, nomeOperadorTransacao, conta);
