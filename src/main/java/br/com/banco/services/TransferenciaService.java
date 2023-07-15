@@ -26,4 +26,7 @@ public class TransferenciaService {
         return this.transferenciaRepository.findAll();
     }
 
+    public List<Transferencia> findByNomeOperador(String nomeOperador) {
+        return this.transferenciaRepository.findByNomeOperador(nomeOperador);
+    }
 }
