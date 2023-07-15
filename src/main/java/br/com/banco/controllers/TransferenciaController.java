@@ -18,9 +18,13 @@ public class TransferenciaController {
     @Autowired
     private TransferenciaService transferenciaService;
 
-    @GetMapping()
+    @GetMapping
     public List<Transferencia> findByContaId(@RequestParam Long contaId) {
         return this.transferenciaService.findByContaId(contaId);
     }
 
+    @GetMapping("/all")
+    public List<Transferencia> findAll() {
+        return this.transferenciaService.findAll();
+    }
 }

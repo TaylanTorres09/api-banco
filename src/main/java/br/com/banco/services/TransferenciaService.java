@@ -22,4 +22,8 @@ public class TransferenciaService {
         return this.transferenciaRepository.findByContaId(contaId);
     }
 
+    public List<Transferencia> findAll() {
+        return this.transferenciaRepository.findAll();
+    }
+
 }
