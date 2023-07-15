@@ -1,5 +1,6 @@
 package br.com.banco.repositories;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,5 +18,8 @@ public interface TransferenciaRepository extends JpaRepository<Transferencia, Lo
 
     @Query(value = "SELECT * FROM TRANSFERENCIA t WHERE t.nome_operador_transacao = :nomeOperador", nativeQuery = true)
     List<Transferencia> findByNomeOperador(@Param(value = "nomeOperador") String nomeOperador);
+    
+    @Query(value = "SELECT * FROM TRANSFERENCIA t WHERE t.data_transferencia BETWEEN :first AND :last ", nativeQuery = true)
+    List<Transferencia> findBetweenDates(@Param(value = "first") LocalDateTime first, @Param(value = "last") LocalDateTime last);
 
 }
