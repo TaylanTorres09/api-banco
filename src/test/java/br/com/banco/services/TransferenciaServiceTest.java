@@ -1,11 +1,17 @@
 package br.com.banco.services;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.when;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -32,6 +38,9 @@ public class TransferenciaServiceTest {
     @Mock
     private TransferenciaRepository transferenciaRepository;
 
+    @Mock
+    private ContaService contaService;
+
     private Conta conta = new Conta();
     private Transferencia transferencia = new Transferencia();
     List<Transferencia> transferencias;
@@ -40,6 +49,25 @@ public class TransferenciaServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         startContaTransferencia();
+    }
+
+    @Test
+    void whenFindByIdTheReturnListTransferencia() {
+        when(transferenciaRepository.findByContaId(anyLong())).thenReturn(transferencias);
+        when(contaService.findById(anyLong())).thenReturn(conta);
+
+        List<Transferencia> response = transferenciaService.findByContaId(ID);
+
+        assertNotNull(response);
+        assertEquals(Transferencia.class, response.get(0).getClass());
+        assertEquals(ID, response.get(0).getId());
+        assertEquals(dataTransferencia, response.get(0).getDataTransferencia());
+        assertEquals(valor, response.get(0).getValor());
+        assertEquals(tipo, response.get(0).getTipo());
+        assertEquals(nomeOperadorTransacao, response.get(0).getNomeOperadorTransacao());
+        assertEquals(conta.getClass(), response.get(0).getConta().getClass());
+        assertEquals(conta.getIdConta(), response.get(0).getConta().getIdConta());
+        assertEquals(conta.getNomeResponsavel(), response.get(0).getConta().getNomeResponsavel());
     }
 
     private void startContaTransferencia() {
