@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.banco.models.Conta;
 import br.com.banco.repositories.ContaRepository;
+import br.com.banco.services.exceptions.ObjectNotFound;
 
 @SpringBootTest
 public class ContaServiceTest {
@@ -49,6 +50,18 @@ public class ContaServiceTest {
         assertEquals(Conta.class, response.getClass());
         assertEquals(ID, response.getIdConta());
         assertEquals(nomeResponsavel, response.getNomeResponsavel());
+    }
+
+    @Test
+    void whenFindByIdTheThrowObjectNotFound() {
+        when(contaRepository.findById(anyLong())).thenThrow(new ObjectNotFound("Conta inexistente"));
+
+        try {
+            contaService.findById(ID);
+        } catch (Exception e) {
+            assertEquals(ObjectNotFound.class, e.getClass());
+            assertEquals("Conta inexistente", e.getMessage());
+        }
     }
 
     private void startConta() {
