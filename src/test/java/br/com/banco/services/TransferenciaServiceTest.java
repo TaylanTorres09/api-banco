@@ -2,6 +2,7 @@ package br.com.banco.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -32,7 +33,7 @@ public class TransferenciaServiceTest {
     private static final Double valor = 30895.46;
     private static final String tipo = "DEPOSITO";
     private static final String nomeOperadorTransacao = "Donatello";
-    
+
     @InjectMocks
     private TransferenciaService transferenciaService;
 
@@ -94,6 +95,24 @@ public class TransferenciaServiceTest {
         when(transferenciaRepository.findByNomeOperador(anyString())).thenReturn(transferencias);
 
         List<Transferencia> response = transferenciaService.findByNomeOperador(nomeOperadorTransacao);
+
+        assertNotNull(response);
+        assertEquals(Transferencia.class, response.get(0).getClass());
+        assertEquals(ID, response.get(0).getId());
+        assertEquals(dataTransferencia, response.get(0).getDataTransferencia());
+        assertEquals(valor, response.get(0).getValor());
+        assertEquals(tipo, response.get(0).getTipo());
+        assertEquals(nomeOperadorTransacao, response.get(0).getNomeOperadorTransacao());
+        assertEquals(conta.getClass(), response.get(0).getConta().getClass());
+        assertEquals(conta.getIdConta(), response.get(0).getConta().getIdConta());
+        assertEquals(conta.getNomeResponsavel(), response.get(0).getConta().getNomeResponsavel());
+    }
+
+    @Test
+    void whenFindBetweenDatesThenReturnTransferencias() {
+        when(transferenciaRepository.findBetweenDates(any(), any())).thenReturn(transferencias);
+
+        List<Transferencia> response = transferenciaService.findBetweenDates("2019-01-01 12:00:00", "2019-01-01 12:00:00");
 
         assertNotNull(response);
         assertEquals(Transferencia.class, response.get(0).getClass());
