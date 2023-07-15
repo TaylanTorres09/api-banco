@@ -39,4 +39,9 @@ public class TransferenciaController {
         return this.transferenciaService.findBetweenDates(first, last);
     }
 
+    @GetMapping("/datas-operador")
+    public List<Transferencia> findBetweenDates(@RequestParam String nome, @RequestParam String first, @RequestParam String last) {
+        return this.transferenciaService.findBetweenDatesAndOperador(nome, first, last);
+    }
+
 }

@@ -22,4 +22,7 @@ public interface TransferenciaRepository extends JpaRepository<Transferencia, Lo
     @Query(value = "SELECT * FROM TRANSFERENCIA t WHERE t.data_transferencia BETWEEN :first AND :last ", nativeQuery = true)
     List<Transferencia> findBetweenDates(@Param(value = "first") LocalDateTime first, @Param(value = "last") LocalDateTime last);
 
+    @Query(value = "SELECT * FROM TRANSFERENCIA t WHERE t.nome_operador_transacao = :nome AND t.data_transferencia BETWEEN :first AND :last ", nativeQuery = true)
+    List<Transferencia> findBetweenDatesAndOperador(@Param(value = "nome") String nome, @Param(value = "first") LocalDateTime first, @Param(value = "last") LocalDateTime last);
+
 }

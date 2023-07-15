@@ -39,4 +39,12 @@ public class TransferenciaService {
 
         return this.transferenciaRepository.findBetweenDates(firsTime, lastTime);
     }
+
+    public List<Transferencia> findBetweenDatesAndOperador(String nome, String first, String last) {
+        DateTimeFormatter fmt =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime firsTime = LocalDateTime.parse(first, fmt);
+        LocalDateTime lastTime = LocalDateTime.parse(last, fmt).plusDays(1);
+
+        return this.transferenciaRepository.findBetweenDatesAndOperador(nome, firsTime, lastTime);
+    }
 }
