@@ -36,7 +36,7 @@ Seguem exemplos de endpoints para utilização da api.
 - Para executar os teste da aplicação, você pode executar todos ou de um por um.
 ![Tests](README_IMG/testes.png)
 
-- Na pasta src/main, execute o arquivo JunitMockitoApplication.java
+- Na pasta src/main, execute o arquivo BancoApplication.java
 
 ![BancoApplication](README_IMG/BancoApplication.png)
 
@@ -45,6 +45,10 @@ Seguem exemplos de endpoints para utilização da api.
     - [Insomnia](https://insomnia.rest/download)
     - Extensão do VsCode [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
     - Ou outra de sua preferência.
+
+## Próximos Passos
+- Implementar métodos de cadastro, atualização e anulação de contas.
+- Fazer deploy.
 
 ## Autor
 <a href="https://www.linkedin.com/in/taylan-torres" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
